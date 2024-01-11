@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>Video Feed</title>
+
+</head>
+
+<body>
+    <h1>Camera Feed</h1>
+    <!-- <div class="video-container">
+        <video id="video" autoplay></video>
+    </div> -->
+    <section>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">Real-Time Display Basler Camera </div>
+                <div class="cameras">
+                    {% for camera in cameras %}
+                    <div class="card-camera">
+                        <div>
+                            <img src="{{ url_for('video', camera_index=camera['camera_index']) }}" class="corner" />
+                        </div>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p>current width: {{ camera['current_w'] }}</p>
+                                    </td>
+                                    <td>
+                                        <!-- Camera settings forms for each camera -->
+                                        <form method="POST" action="/width1">
+                                            <input type="hidden" name="camera_index"
+                                                value="{{ camera['camera_index'] }}" />
+                                            <!-- Add other settings inputs here -->
+                                            <label for="text_width">Width</label>
+                                            <input type="text" name="text_width" id="text_width" />
+                                            <input type="submit" value="Change" />
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>current height: {{ camera['current_h'] }}</p>
+
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/height1">
+                                            <input type="hidden" name="camera_index"
+                                                value="{{ camera['camera_index'] }}" />
+                                            <label for="text_width">Height</label>
+                                            <input type="text" name="text_height" id="text_height" />
+                                            <input type="submit" value="Change" />
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>min: {{ camera['min_exp'] }}</p>
+                                        <p>max: {{ camera['max_exp'] }} </p>
+                                        <p>exposure: {{ camera['current_exp'] }}</p>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/exposure" id="exposure" name="exposure">
+                                            <input type="hidden" name="camera_index" value="{{ camera['camera_index'] }}" />
+                                            <label for="text_width">Exposure</label>
+                                            <input type="text" name="text_exposure" id="text_exposure" />
+                                            <input type="submit" value="Change" />
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <form method="POST" action="/reverseX" id="reverseX" name="reverseX">
+                                        <input type="hidden" name="camera_index" value="{{ camera['camera_index'] }}" />
+                                        <label for="reverseX">Reverse X</label>
+                                        <input type="checkbox" name="text_reverseX" id="text_reverseX" />
+                                        <input type="submit" value="Change" />
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <form method="POST" action="/reverseY" id="reverseY" name="reverseY">
+                                        <input type="hidden" name="camera_index" value="{{ camera['camera_index'] }}" />
+                                        <label for="reverseX">Reverse Y</label>
+                                        <input type="checkbox" name="text_reverseY" id="text_reverseY" />
+                                        <input type="submit" value="Change" />
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        pixel format: {{ camera['pixel_format'] }}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/pixelFormat" id="pixel_format" name="pixel_format">
+                                            <input type="hidden" name="camera_index"
+                                                value="{{ camera['camera_index'] }}" />
+                                            <label for="pixel_format">Pixel Format</label>
+                                            <select name="text_pixel_format" id="text_pixel_format">
+                                                <option value="Mono12">Mono12</option>
+                                                <option value="Mono10">Mono10</option>
+                                                <option value="Mono8">Mono8</option>
+                                                <option value="RGB8">RGB8</option>
+                                                <option value="BGR8">BGR8</option>
+                                                <option value="BayerRG8">BayerRG8</option>
+                                                <option value="BayerRG10">BayerRG10</option>
+                                                <option value="BayerRG12">BayerRG12</option>
+                                            </select>
+                                            <input type="submit" value="Change" />
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>max {{ camera['max_gain'] }}</p>
+                                        <p>min {{ camera['min_gain'] }}</p>
+                                        <p>current {{ camera['current_gain'] }} </p>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/gain" id="gain" name="gain">
+                                            <input type="hidden" name="camera_index"
+                                                value="{{ camera['camera_index'] }}" />
+                                            <input type="text" name="text_gain" id="text_gain" />
+                                            <input type="submit" value="Change" />
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        </div>
+
+    </section>
+
+    <script>
+        const video = document.getElementById('video');
+
+        // Replace the 'src' attribute with the video feed URL
+        // video.src = "/video_feed/0"; // Change the camera_index to the desired camera
+
+        // You can adjust the video size and other settings here
+        video.width = 640;
+        video.height = 480;
+    </script>
+</body>
+
+</html>
